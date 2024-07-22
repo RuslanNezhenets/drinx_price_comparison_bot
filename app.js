@@ -9,7 +9,7 @@ const priceCheckFilePath = process.env.PRICE_CHECK_FILE_PATH
 const parsingDataPath = process.env.PARSING_DATA_PATH
 
 async function main() {
-    const filesForComparison = await getFilesForComparison()
+    const filesForComparison = await getFilesForComparison(parsingDataPath)
 
     const oldFilePath = parsingDataPath + '/' + filesForComparison.weekOldFile
     const newFilePath = parsingDataPath + '/' + filesForComparison.closestFile

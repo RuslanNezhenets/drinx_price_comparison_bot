@@ -1,9 +1,5 @@
 const fs = require('fs')
-const path = require('path')
 const {parse, differenceInDays, subDays} = require('date-fns')
-
-// Путь к папке с файлами
-const directoryPath = path.join(__dirname, '../Data')
 
 // Функция для получения названий файлов
 const getFiles = async (dirPath) => {
@@ -33,7 +29,7 @@ const findClosestFile = (files, targetDate) => {
 }
 
 // Вызов функций для получения и нахождения файлов
-const getFilesForComparison = async () => {
+const getFilesForComparison = async (directoryPath) => {
     const files = await getFiles(directoryPath)
     const today = new Date()
     const closestFile = findClosestFile(files, today)
