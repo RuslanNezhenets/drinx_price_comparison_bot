@@ -1,6 +1,5 @@
 const XLSX = require("xlsx")
 const axios = require("axios")
-const {localRetailList} = require("../retailList")
 
 require('dotenv').config()
 
@@ -29,6 +28,7 @@ async function getRetail() {
     } else {
         console.log('Request failed with status: ' + response.status)
         console.log('Не удалось актуализировать Retail список')
+        const {localRetailList} = require("../retailList")
         return localRetailList
     }
 }
