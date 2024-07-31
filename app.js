@@ -1,4 +1,4 @@
-const {convertFirstSheetToJson, normalizeId, extractDate, determineReason, getRetail} = require('./utils/dataUtils')
+const {convertFirstSheetToJson, normalizeId, extractDate, determineReason, getRetail, formatProductText} = require('./utils/dataUtils')
 const {writeJsonToExcel} = require('./utils/excelUtils')
 const {comparePrices, updatePriceDifferences} = require('./utils/priceUtils')
 const {getFilesForComparison} = require("./utils/findFilesForComparison")
@@ -37,12 +37,19 @@ async function main() {
 
     priceDifferences = updatePriceDifferences(priceDifferences, priceCheck, retailList)
 
+    const priceDifferencesText = formatProductText(priceDifferences)
+
     const workbook = await writeJsonToExcel(priceDifferences, notPresentInSku, oldFilePath, newFilePath)
 
     //const outputFilePath = 'Price_Differences.xlsx'
     //await workbook.xlsx.writeFile(outputFilePath)
 
-    return {file: workbook, oldDate: extractDate(oldFilePath, '.'), newDate: extractDate(newFilePath, '.')}
+    return {
+        file: workbook,
+        oldDate: extractDate(oldFilePath, '.'),
+        newDate: extractDate(newFilePath, '.'),
+        text: priceDifferencesText
+    }
 }
 
 module.exports = {main}

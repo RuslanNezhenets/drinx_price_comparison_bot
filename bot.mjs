@@ -10,11 +10,11 @@ const chatId = process.env.CHAT_ID.startsWith('-') ? process.env.CHAT_ID : `-${p
 
 const sendMessage = async (token, chatId) => {
     try {
-        const {file, oldDate, newDate} = await main()
+        const {file, oldDate, newDate, text} = await main()
         const workbookBuffer = await file.xlsx.writeBuffer()
         const workbookBlob = new Blob([workbookBuffer], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'})
 
-        const message = `Сравнение цен за ${oldDate} и за ${newDate}`
+        const message = `Сравнение цен за ${oldDate} и за ${newDate}${text ? '\n\n' + text : ''}`
 
         const form = new FormData()
         form.append('chat_id', chatId)

@@ -29,6 +29,7 @@ function updatePriceDifferences(priceDifferences, priceCheck, retailList) {
             return {
                 ...item,
                 sku: matchingItemInPriceCheck['No.'],
+                title: matchingItemInPriceCheck['Item name'],
                 price: matchingItemRetailList['unitPrice']
             }
         }

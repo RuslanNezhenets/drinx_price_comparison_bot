@@ -75,10 +75,18 @@ function normalizeId(id) {
     return id.toString().replace(/^0+/, '')
 }
 
+function formatProductText(products) {
+    return products.map(product => {
+        const arrow = product.newPrice > product.oldPrice ? '🟢' : '🔴'
+        return `#${product.sku} - ${product.title} - ${product.size} - ${arrow} - $${product.newPrice.toFixed(2)} - Lax`
+    }).join('\n')
+}
+
 module.exports = {
     convertFirstSheetToJson,
     determineReason,
     extractDate,
     normalizeId,
-    getRetail
+    getRetail,
+    formatProductText
 }
